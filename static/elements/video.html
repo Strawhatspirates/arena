@@ -1,0 +1,102 @@
+<link rel="import" href="/static/components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/static/components/core-header-panel/core-header-panel.html">
+
+<polymer-element name="video-panel" attributes = "src name">
+  <template>
+    <style>
+
+    :host
+    {
+       background-color: #FF00FF;
+    }
+    .toolbar-title{
+       background-color:#03a9f4;
+        color:white;
+    }
+    @media screen and (min-width:600px){
+
+
+    .video-title{
+        width:20%;
+        height: 41%;
+        margin-left: 100px;
+        /*margin-bottom: 10px;*/
+        float: left;
+       
+    }
+    .tag-name{
+    }
+    .video-elem{
+        margin-top: 0px;
+    }
+    .videos{
+        width:100%;
+        height:70%;
+    }
+    
+    }
+        
+    @media screen and (max-width: 600px){
+    
+   .video-title{
+        width: 250px;
+       height: 320px;
+       margin-left: 20px;
+       margin-bottom: 10px;
+       float:left;
+      
+    }
+    .tag-name{
+    }
+    .video-elem{
+         margin-top: 0px;
+    }
+      .videos{
+        margin-top: 0px
+        width:100%;
+        height:70%;
+    }
+    
+    }
+        
+   @media screen and (max-width: 350px){
+    
+   .video-title{
+        width: 350px;
+       margin-bottom: 10px;
+       float:left;
+       
+    }
+    .tag-name{
+    }
+    .video-elem{
+        
+    }
+       .videos{
+        width:100%;
+        height:70%;
+    }
+    
+    }
+    
+    
+        
+  </style>
+  
+  <core-header-panel class="video-title">
+    <core-toolbar class="toolbar-title">
+         {{name}}
+    </core-toolbar>
+     <div class="video-elem">
+      <video class="videos" poster="http://bit.ly/1cSC6Ri" src="{{src}}" autoplay></video> 
+     </div>
+  </core-header-panel>
+  </template>
+ <script>
+  Polymer({
+    ready: function(){
+      this.name= "Video";
+    }
+  });
+  </script>
+</polymer-element>

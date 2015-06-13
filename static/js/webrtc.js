@@ -45,10 +45,9 @@ function Webrtc() {
     peer.connection.onaddstream = function(event){
       console.log("a stream added from "+user_id.toString());
       // View.addVideo(event.stream);
-      var element = document.createElement("video");
+      var element = document.createElement("video-panel");
       element.src= URL.createObjectURL(event.stream);
       document.body.appendChild(element);
-      element.play();
     }
 
     peer.connection.onremovestream = function(event){

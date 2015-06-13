@@ -2,9 +2,8 @@
 
 getUserMedia({video: true, audio: true}, function(stream){
   peers.stream = stream;
-  var element = document.createElement("video");
+  var element = document.createElement("video-panel");
   element.src = URL.createObjectURL(stream);
-  element.play();
   document.body.appendChild(element);
   window.socket = io.connect();
   console.log("socket initialized");
