@@ -26,6 +26,6 @@ app.get('/:id', function(req, res){
 
 RTC(io);
 
-server.listen(constants.port, function(){
+server.listen(constants.port,constants.ip,function(){
   console.log("the server started at port " + constants.port);
 })
