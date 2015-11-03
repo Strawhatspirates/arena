@@ -10,7 +10,16 @@ function backend() {
     socket_id: String,
     room_id: String,
   });
+
+  var RoomSchema = new Schema({
+    _id: String,
+    user_id: String,
+    socket: String
+  });
+
+
   var Video = mongo.model('video', VideoSchema);
+  var Room = mongo.model('room', RoomSchema);
 
   return {
     addorUpdateEntity: function(user_id, room_id, socket_id) {
@@ -52,7 +61,7 @@ function backend() {
         user_id: user_id
       }).exec();
       video.then(function(docs) {
-        docs.forEach(function(doc){
+        docs.forEach(function(doc) {
           callback(doc);
         })
       });
@@ -77,15 +86,52 @@ function backend() {
       })
     },
 
-    removeSocket: function(id){
-      Video.find({socket_id: id}, function(err, results){
-         results.forEach(function(doc){
-           doc.remove();
-         })
+    removeSocket: function(id) {
+      Video.find({
+        socket_id: id
+      }, function(err, results) {
+        results.forEach(function(doc) {
+          doc.remove();
+        })
       });
-    }
+    },
 
+    getUserBySocket: function(id) {
+      return Room.findOne({
+        socket: id
+      }).exec();
+    },
 
+    getUserById: function(id){
+      return Room.findOne({
+        user_id: id
+      }).exec();
+    },
+
+    deleteUserById: function(id){
+     Room.findOneAndRemove({
+       user_id: id
+     }, function(err, docs){
+       if(err){
+         console.log(err);
+       }
+     });
+   },
+
+   deleteUserBySocket: function(id){
+     Room.findOneAndRemove({
+       socket: id
+     }, function(err, docs){
+       if(err){
+         console.log(err);
+       }
+     });
+   },
+
+   addNewUser: function(data){
+     var room = new Room(data);
+     return room.save();
+   }
 
   }
 }
